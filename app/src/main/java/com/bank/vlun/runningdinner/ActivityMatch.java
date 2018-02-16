@@ -2,38 +2,58 @@ package com.bank.vlun.runningdinner;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ActivityMatch extends AppCompatActivity {
 
-    ListView lv_Groups;
+    private GroupAdapter groupAdapter;
+    private List<GroupObject> groupList;
+    private RecyclerView rv_Groups;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match);
 
-        lv_Groups = findViewById(R.id.lv_Groups);
 
-        String [] values = new String[] {"skl","slkdjf","alskdj","alksdjlkj","lkajsdl"};
+        rv_Groups = findViewById(R.id.recycler_view_groups);
+        groupList = new ArrayList<>();
+        groupAdapter = new GroupAdapter(this, groupList);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                (this, R.layout.list_element_group, values);
+        rv_Groups.setAdapter(groupAdapter);
 
-        lv_Groups.setAdapter(adapter);
-        lv_Groups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        fillGroups();
+    }
 
-                int itemPosition = i;
-               // String itemValue = (String) lv_Groups.getItemAtPosition(i);
+    private void fillGroups(){
 
-                Toast.makeText(ActivityMatch.this, "Item geklickt ", Toast.LENGTH_SHORT).show();
-            }
-        });
+        GroupObject groupObject = new GroupObject("2/4");
+        groupList.add(groupObject);
+
+        groupObject = new GroupObject("3/4");
+        groupList.add(groupObject);
+
+        groupObject = new GroupObject("3/4");
+        groupList.add(groupObject);
+        groupObject = new GroupObject("1/4");
+        groupList.add(groupObject);
+        groupObject = new GroupObject("1/4");
+        groupList.add(groupObject);
+        groupObject = new GroupObject("2/4");
+        groupList.add(groupObject);
+        groupObject = new GroupObject("3/4");
+        groupList.add(groupObject);
+
+        groupAdapter.notifyDataSetChanged();
 
     }
 }
