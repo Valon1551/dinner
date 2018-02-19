@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -26,20 +26,20 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.MyViewHolder
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public Button btn_Room, btn_Mo, btn_Di, btn_Mi, btn_Do, btn_Fr, btn_Sa, btn_So;
+        public TextView tv_Room, tv_Mo, tv_Di, tv_Mi, tv_Do, tv_Fr, tv_Sa, tv_So;
 
         public MyViewHolder(View view) {
             super(view);
 
             // Alle Buttons in der Cardview werden hier referenziert
-            btn_Room = view.findViewById(R.id.btn_Room);
-            btn_Mo = view.findViewById(R.id.btn_Mo);
-            btn_Di = view.findViewById(R.id.btn_Di);
-            btn_Mi = view.findViewById(R.id.btn_Mi);
-            btn_Do = view.findViewById(R.id.btn_Do);
-            btn_Fr = view.findViewById(R.id.btn_Fr);
-            btn_Sa =  view.findViewById(R.id.btn_Sa);
-            btn_So = view.findViewById(R.id.btn_So);
+            tv_Room = view.findViewById(R.id.btn_Room);
+            tv_Mo = view.findViewById(R.id.tv_Mo);
+            tv_Di = view.findViewById(R.id.tv_Di);
+            tv_Mi = view.findViewById(R.id.tv_Mi);
+            tv_Do = view.findViewById(R.id.tv_Do);
+            tv_Fr = view.findViewById(R.id.tv_Fr);
+            tv_Sa =  view.findViewById(R.id.tv_Sa);
+            tv_So = view.findViewById(R.id.tv_So);
         }
     }
 
@@ -65,19 +65,28 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.MyViewHolder
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
         GroupObject groupObject = groupList.get(position);
 
 
-        holder.btn_Room.setText(groupObject.getName());
+        holder.tv_Room.setText(groupObject.getName());
 
-        holder.btn_Room.setOnClickListener(new View.OnClickListener() {
+        holder.tv_Room.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(mContext, "Raum "+position+" angeklickt", Toast.LENGTH_SHORT).show();
             }
         });
+
+        // Damit kann man den Background der einzelnen Textviews ändern. Für später eventuell wichtig
+//        holder.tv_Mo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                holder.tv_Mo.setBackgroundResource(R.drawable.weekdaybutton_border_red);
+//            }
+//        });
+
 
     }
 
