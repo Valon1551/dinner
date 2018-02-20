@@ -36,101 +36,112 @@
             android:id="@+id/tv_ratingProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Bewertungen"
+            android:background="@color/colorAccent"
+            android:textColor="@color/white"
+            android:text="Bewerte deinen Koch:"
             android:textSize="18sp" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_ratingProfile">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-        <RatingBar
-            android:id="@+id/rb_Geschmack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:isIndicator="true"
-            android:max="5"
-            android:rating="3.5"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
-            android:transformPivotX="0dp"
-            android:transformPivotY="0dp" />
 
-        <RatingBar
-            android:id="@+id/rb_Location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/rb_Geschmack"
-            android:isIndicator="true"
-            android:max="5"
-            android:rating="3.5"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
-            android:transformPivotX="0dp"
-            android:transformPivotY="0dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Geschmack"
+                    android:textSize="20sp"/>
 
-        <RatingBar
-            android:id="@+id/rb_Freundlichkeit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/rb_Location"
-            android:isIndicator="true"
-            android:max="5"
-            android:rating="3.5"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
-            android:transformPivotX="0dp"
-            android:transformPivotY="0dp" />
+                <RatingBar
+                    android:id="@+id/rb_Geschmack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:isIndicator="false"
+                    android:max="5"
+                    android:rating="1"
+                    android:scaleX="0.6"
+                    android:scaleY="0.6"
+                    android:transformPivotX="0dp"
+                    android:transformPivotY="0dp" />
 
-        <RatingBar
-            android:id="@+id/rb_placeholder1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/rb_Freundlichkeit"
-            android:isIndicator="true"
-            android:max="5"
-            android:rating="3.5"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
-            android:transformPivotX="0dp"
-            android:transformPivotY="0dp" />
+                <RatingBar
+                    android:id="@+id/rb_Location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@+id/rb_Geschmack"
+                    android:isIndicator="false"
+                    android:max="5"
+                    android:rating="1"
+                    android:scaleX="0.6"
+                    android:scaleY="0.6"
+                    android:transformPivotX="0dp"
+                    android:transformPivotY="0dp" />
 
-        <RatingBar
-            android:id="@+id/rb_placeholder2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/rb_placeholder1"
-            android:isIndicator="true"
-            android:max="5"
-            android:rating="3.5"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
-            android:transformPivotX="0dp"
-            android:transformPivotY="0dp" />
+                <RatingBar
+                    android:id="@+id/rb_Freundlichkeit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@+id/rb_Location"
+                    android:isIndicator="false"
+                    android:max="5"
+                    android:rating="1"
+                    android:scaleX="0.6"
+                    android:scaleY="0.6"
+                    android:transformPivotX="0dp"
+                    android:transformPivotY="0dp" />
 
-        <RatingBar
-            android:id="@+id/rb_summaryRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/rb_placeholder2"
-            android:isIndicator="true"
-            android:max="5"
-            android:rating="3.5"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
-            android:transformPivotX="0dp"
-            android:transformPivotY="0dp" />
+                <RatingBar
+                    android:id="@+id/rb_placeholder1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/rb_Freundlichkeit"
+                    android:isIndicator="false"
+                    android:max="5"
+                    android:rating="1"
+                    android:scaleX="0.6"
+                    android:scaleY="0.6"
+                    android:transformPivotX="0dp"
+                    android:transformPivotY="0dp" />
+
+                <RatingBar
+                    android:id="@+id/rb_placeholder2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/rb_placeholder1"
+                    android:isIndicator="false"
+                    android:max="5"
+                    android:rating="1"
+                    android:scaleX="0.6"
+                    android:scaleY="0.6"
+                    android:transformPivotX="0dp"
+                    android:transformPivotY="0dp" />
+
+                <RatingBar
+                    android:id="@+id/rb_summaryRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/rb_placeholder2"
+                    android:isIndicator="true"
+                    android:max="5"
+                    android:rating="1"
+                    android:scaleX="0.6"
+                    android:scaleY="0.6"
+                    android:transformPivotX="0dp"
+                    android:transformPivotY="0dp" />
             </RelativeLayout>
         </ScrollView>
     </RelativeLayout>
+
     <Button
         android:id="@+id/btn_sendRating"
         android:layout_width="match_parent"

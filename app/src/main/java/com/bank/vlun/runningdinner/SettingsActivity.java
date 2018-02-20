@@ -166,7 +166,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         Glide.with(this).load(R.drawable.profile_pic_zacke).apply(RequestOptions.circleCropTransform()).into(ivProfilePic);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String profileName = sharedPreferences.getString("example_text","-1");
+        String profileName = sharedPreferences.getString("example_text","Name nicht gefunden");
         tvProfileName.setText(profileName);
         loadHeadersFromResource(R.xml.pref_headers, target);
 
