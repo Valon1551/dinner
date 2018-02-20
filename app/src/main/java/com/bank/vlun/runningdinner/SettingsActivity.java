@@ -3,6 +3,7 @@ package com.bank.vlun.runningdinner;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.Image;
 import android.media.Ringtone;
@@ -20,6 +21,7 @@ import android.preference.RingtonePreference;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -158,10 +160,16 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         // Dieser Code ist wichtig!! Hier wird das Layout des Preferenceheaders verändert.
         // Das Hier ist die einzige Methode bei dem man das Layout der Preference verändern kann!
         setContentView(R.layout.test);
+
+        TextView tvProfileName = findViewById(R.id.tv_profileName);
         ImageView ivProfilePic = findViewById(R.id.iv_profilePic);
         Glide.with(this).load(R.drawable.profile_pic_zacke).apply(RequestOptions.circleCropTransform()).into(ivProfilePic);
 
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String profileName = sharedPreferences.getString("example_text","-1");
+        tvProfileName.setText(profileName);
         loadHeadersFromResource(R.xml.pref_headers, target);
+
     }
 
     /**
