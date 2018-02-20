@@ -32,6 +32,13 @@
             android:text="EAT"
             android:textColor="#FFFFFF"
             android:textSize="30sp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="Bewertung abgeben"
+            android:id="@+id/btn_rateProfile"/>
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
