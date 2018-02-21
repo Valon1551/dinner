@@ -1,11 +1,10 @@
-package com.bank.vlun.runningdinner;
+package com.jolameva.app.runningdinner.settings;
 
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.media.Image;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -25,6 +24,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.jolameva.app.runningdinner.R;
+import com.jolameva.app.runningdinner.login.ActivityLogin;
 
 import java.util.List;
 
@@ -163,11 +164,13 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
         TextView tvProfileName = findViewById(R.id.tv_profileName);
         ImageView ivProfilePic = findViewById(R.id.iv_profilePic);
-        Glide.with(this).load(R.drawable.profile_pic_zacke).apply(RequestOptions.circleCropTransform()).into(ivProfilePic);
+        // Todo: imageUrl sollte als Objekt in einer externen Klasse gespeichert werden!
+        Uri imageUrl = ActivityLogin.imageUrl;
+        Glide.with(this).load(imageUrl).apply(RequestOptions.circleCropTransform()).into(ivProfilePic);
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String profileName = sharedPreferences.getString("example_text","Name nicht gefunden");
-        tvProfileName.setText(profileName);
+//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        String profileName = sharedPreferences.getString("example_text","Name nicht gefunden");
+        tvProfileName.setText(ActivityLogin.name);
         loadHeadersFromResource(R.xml.pref_headers, target);
 
     }

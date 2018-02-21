@@ -1,4 +1,4 @@
-package com.bank.vlun.runningdinner;
+package com.jolameva.app.runningdinner;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -22,8 +22,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.MyViewHolder
     private Context mContext;
     private List<GroupObject> groupList;
 
-
-
+    
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public TextView tv_Room, tv_Mo, tv_Di, tv_Mi, tv_Do, tv_Fr, tv_Sa, tv_So;
@@ -31,7 +30,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.MyViewHolder
         public MyViewHolder(View view) {
             super(view);
 
-            // Alle Buttons in der Cardview werden hier referenziert
+            // Alle TextViews in der Cardview werden hier referenziert
             tv_Room = view.findViewById(R.id.btn_Room);
             tv_Mo = view.findViewById(R.id.tv_Mo);
             tv_Di = view.findViewById(R.id.tv_Di);
@@ -42,7 +41,6 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.MyViewHolder
             tv_So = view.findViewById(R.id.tv_So);
         }
     }
-
 
     public GroupAdapter(Context mContext, List<GroupObject> groupList) {
         this.mContext = mContext;
@@ -69,7 +67,6 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.MyViewHolder
 
         GroupObject groupObject = groupList.get(position);
 
-
         holder.tv_Room.setText(groupObject.getName());
 
         holder.tv_Room.setOnClickListener(new View.OnClickListener() {
@@ -86,8 +83,6 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.MyViewHolder
 //                holder.tv_Mo.setBackgroundResource(R.drawable.weekdaybutton_border_red);
 //            }
 //        });
-
-
     }
 
     @Override

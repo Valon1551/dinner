@@ -1,4 +1,4 @@
-package com.bank.vlun.runningdinner;
+package com.jolameva.app.runningdinner;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,9 +11,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.facebook.FacebookSdk;
+import com.jolameva.app.runningdinner.login.ActivityLogin;
+import com.jolameva.app.runningdinner.settings.SettingsActivity;
+
 public class MainActivity extends AppCompatActivity {
 
-    Button btn_Start, btn_RateProfile;
+    Button btn_Start, btn_RateProfile, btn_GotoLogin;
+    public static String name="Platzhalter Vorname", surname="Platzhalter Nachname", imageUrl="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar main_toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(main_toolbar);
 
+
+        btn_GotoLogin = findViewById(R.id.btn_gotoLogin);
         btn_Start = findViewById(R.id.btn_Start);
         btn_RateProfile = findViewById(R.id.btn_rateProfile);
 
@@ -37,6 +44,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ActivityRating.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_GotoLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent (MainActivity.this, ActivityLogin.class);
                 startActivity(intent);
             }
         });

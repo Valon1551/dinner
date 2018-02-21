@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bank.vlun.runningdinner.MainActivity">
+    tools:context="com.jolameva.app.runningdinner.MainActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/main_toolbar"
@@ -39,6 +39,13 @@
             android:layout_alignParentBottom="true"
             android:text="Bewertung abgeben"
             android:id="@+id/btn_rateProfile"/>
+
+        <Button
+            android:layout_above="@+id/btn_rateProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Zum Login"
+            android:id="@+id/btn_gotoLogin"/>
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
