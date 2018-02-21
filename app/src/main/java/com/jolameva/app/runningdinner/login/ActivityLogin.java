@@ -25,6 +25,8 @@ import com.jolameva.app.runningdinner.R;
 
 import org.json.JSONObject;
 
+import java.util.Arrays;
+
 
 public class ActivityLogin extends AppCompatActivity {
 
@@ -35,93 +37,47 @@ public class ActivityLogin extends AppCompatActivity {
     private TextView tv_infoLogin;
     private ProfileTracker fbProfileTracker;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        callbackManager = CallbackManager.Factory.create();
+    private static final String EMAIL = "email";
+    private static final String USER_POSTS = "user_posts";
 
-        tv_infoLogin = findViewById(R.id.tv_logininfo);
-        fbbtn_Login = findViewById(R.id.fbbtn_login_button);
-        fbbtn_Login.setReadPermissions("email");
-
-        // Callback Registrierung
-        // WICHTIG: Es kann immer nur ein User pro App angemeldet sein. Entweder wir prüfen ob der AcccessToken != null ist oder wir sorgen dafür das der LoginButton verschwindet
-        fbbtn_Login.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                // Code
-                if (Profile.getCurrentProfile() == null){
-                    fbProfileTracker = new ProfileTracker() {
-                        @Override
-                        protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
-                            GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-                                @Override
-                                public void onCompleted(JSONObject object, GraphResponse response) {
-                                    if (BuildConfig.DEBUG) {
-                                        FacebookSdk.setIsDebugEnabled(true);
-                                        FacebookSdk.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
-
-                                        Profile.getCurrentProfile().getId();
-                                        Profile.getCurrentProfile().getFirstName();
-                                        Profile.getCurrentProfile().getLastName();
-                                        Profile.getCurrentProfile().getProfilePictureUri(250, 400);
-
-                                        imageUrl = Profile.getCurrentProfile().getProfilePictureUri(200, 200);
-                                        name = Profile.getCurrentProfile().getName();
-
-                                    }
-                                }
-                            });
-                            request.executeAsync();
-
-                        }
-                    };
-                } else {
-                    GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-                        @Override
-                        public void onCompleted(JSONObject object, GraphResponse response) {
-                            if (BuildConfig.DEBUG) {
-                                FacebookSdk.setIsDebugEnabled(true);
-                                FacebookSdk.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
-
-                                Profile.getCurrentProfile().getId();
-                                Profile.getCurrentProfile().getFirstName();
-                                Profile.getCurrentProfile().getLastName();
-                                Profile.getCurrentProfile().getProfilePictureUri(250, 400);
-
-                                imageUrl = Profile.getCurrentProfile().getProfilePictureUri(200, 200);
-                                name = Profile.getCurrentProfile().getName();
-
-                            }
-                        }
-                    });
-                    request.executeAsync();
-                }
-
-            }
-
-            @Override
-            public void onCancel() {
-
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-
-            }
-        });
-
-    }
-
+    private CallbackManager mCallbackManager;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (callbackManager.onActivityResult(requestCode, resultCode, data)){
-            return;
-        }
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        mCallbackManager = CallbackManager.Factory.create();
+
+        fbbtn_Login = findViewById(R.id.fbbtn_login_button);
+
+        // Set the initial permissions to request from the user while logging in
+        fbbtn_Login.setReadPermissions(Arrays.asList(EMAIL, USER_POSTS));
+
+        // Register a callback to respond to the user
+        fbbtn_Login.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                setResult(RESULT_OK);
+                finish();
+            }
+
+            @Override
+            public void onCancel() {
+                setResult(RESULT_CANCELED);
+                finish();
+            }
+
+            @Override
+            public void onError(FacebookException e) {
+                // Handle exception
+            }
+        });
     }
 }

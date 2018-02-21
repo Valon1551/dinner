@@ -11,14 +11,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.facebook.FacebookSdk;
+import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
 import com.jolameva.app.runningdinner.login.ActivityLogin;
 import com.jolameva.app.runningdinner.settings.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     Button btn_Start, btn_RateProfile, btn_GotoLogin;
-    public static String name="Platzhalter Vorname", surname="Platzhalter Nachname", imageUrl="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,13 @@ public class MainActivity extends AppCompatActivity {
         Toolbar main_toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(main_toolbar);
 
+
+        // If MainActivity is reached without the user being logged in, redirect to the Login
+        // Activity wird später erst gebraucht sobald die Login Activity die Mainactivity als Launchactivity ersetzt
+//        if (AccessToken.getCurrentAccessToken() == null) {
+//            Intent loginIntent = new Intent(MainActivity.this, ActivityLogin.class);
+//            startActivity(loginIntent);
+//        }
 
         btn_GotoLogin = findViewById(R.id.btn_gotoLogin);
         btn_Start = findViewById(R.id.btn_Start);
@@ -58,6 +65,21 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    // Kann für später mal nützlich werden
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        switch (requestCode) {
+//            case RESULT_PROFILE_ACTIVITY:
+//                if (resultCode == RESULT_OK) {
+//                    Intent profileIntent = new Intent(MainActivity.this, ActivityProfile.class);
+//                    startActivity(profileIntent);
+//                }
+//                break;
+//            default:
+//                super.onActivityResult(requestCode,resultCode, data);
+//        }
+//    }
 
     // Diese Methode holt sich die main_menu.xml und zeigt sie in der appbar an
     public boolean onCreateOptionsMenu(Menu menu) {
