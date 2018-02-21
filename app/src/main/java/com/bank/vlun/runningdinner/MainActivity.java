@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btn_Start;
+    Button btn_Start, btn_RateProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +23,20 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(main_toolbar);
 
         btn_Start = findViewById(R.id.btn_Start);
+        btn_RateProfile = findViewById(R.id.btn_rateProfile);
 
         btn_Start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this , ActivityMatch.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_RateProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ActivityRating.class);
                 startActivity(intent);
             }
         });
