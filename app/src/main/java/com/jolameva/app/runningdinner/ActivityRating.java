@@ -1,4 +1,4 @@
-package com.bank.vlun.runningdinner;
+package com.jolameva.app.runningdinner;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;

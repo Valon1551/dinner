@@ -1,11 +1,9 @@
-package com.bank.vlun.runningdinner;
+package com.jolameva.app.runningdinner.settings;
 
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.media.Image;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -25,6 +23,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.jolameva.app.runningdinner.R;
+import com.jolameva.app.runningdinner.login.ActivityLogin;
+import com.jolameva.app.runningdinner.login.callbacks.GetUserCallback;
+import com.jolameva.app.runningdinner.login.entities.User;
+import com.jolameva.app.runningdinner.login.requests.UserRequest;
 
 import java.util.List;
 
@@ -41,7 +45,7 @@ import java.util.List;
  */
 
 // Settings Activity Tutorial: https://google-developer-training.gitbooks.io/android-developer-fundamentals-course-practicals/content/en/Unit%204/92_p_adding_settings_to_an_app.html
-public class SettingsActivity extends AppCompatPreferenceActivity {
+public class SettingsActivity extends AppCompatPreferenceActivity implements GetUserCallback.IGetUserResponse {
 
     /**
      * A preference value change listener that updates the preference's summary
@@ -94,6 +98,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             return true;
         }
     };
+    private SimpleDraweeView mProfilePhotoView;
+    private TextView mName;
 
     /**
      * Helper method to determine if the device has an extra-large screen. For
@@ -129,6 +135,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupActionBar();
+
+        mProfilePhotoView = findViewById(R.id.iv_profilePic);
+        mName = findViewById(R.id.tv_profileName);
+
     }
 
     /**
@@ -140,6 +150,15 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // Show the Up button in the action bar.
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mProfilePhotoView = findViewById(R.id.iv_profilePic);
+        mName = findViewById(R.id.tv_profileName);
+        UserRequest.makeUserRequest(new GetUserCallback(SettingsActivity.this).getCallback());
     }
 
     /**
@@ -160,14 +179,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         // Dieser Code ist wichtig!! Hier wird das Layout des Preferenceheaders verändert.
         // Das Hier ist die einzige Methode bei dem man das Layout der Preference verändern kann!
         setContentView(R.layout.test);
-
-        TextView tvProfileName = findViewById(R.id.tv_profileName);
-        ImageView ivProfilePic = findViewById(R.id.iv_profilePic);
-        Glide.with(this).load(R.drawable.profile_pic_zacke).apply(RequestOptions.circleCropTransform()).into(ivProfilePic);
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String profileName = sharedPreferences.getString("example_text","Name nicht gefunden");
-        tvProfileName.setText(profileName);
+        
         loadHeadersFromResource(R.xml.pref_headers, target);
 
     }
@@ -181,6 +193,16 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 || GeneralPreferenceFragment.class.getName().equals(fragmentName)
                 || DataSyncPreferenceFragment.class.getName().equals(fragmentName)
                 || NotificationPreferenceFragment.class.getName().equals(fragmentName);
+    }
+
+    @Override
+    public void onCompleted(User user) {
+
+        // Try Catch wäre hier geschickter
+        if (mProfilePhotoView != null) {
+            mProfilePhotoView.setImageURI(user.getPicture());
+            mName.setText(user.getName());
+        }
     }
 
     /**

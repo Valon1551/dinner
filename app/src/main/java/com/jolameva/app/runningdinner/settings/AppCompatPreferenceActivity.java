@@ -1,4 +1,4 @@
-package com.bank.vlun.runningdinner;
+package com.jolameva.app.runningdinner.settings;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
