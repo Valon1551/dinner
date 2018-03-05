@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_profilePic"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:fitsSystemWindows="true"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/tv_profileName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_above="@+id/tv_memeberSince"
+        android:background="#50000000"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:paddingLeft="16dp"
+        android:text="Design KING"
+        android:textColor="#fff"
+        android:textSize="22sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:background="#50000000" />
+
+    <TextView
+        android:id="@+id/tv_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:text="Bewertungen: "
+        android:textColor="#fff"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_ratingCounts"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@+id/tv_rating"
+        android:gravity="center_vertical"
+        android:text="218"
+        android:textColor="#fff"
+        android:textSize="20sp" />
+
+    <RatingBar
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="11dp"
+        android:isIndicator="true"
+        android:max="5"
+        android:rating="3.5"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:transformPivotX="0dp"
+        android:transformPivotY="0dp" />
+
+    <TextView
+        android:id="@+id/tv_memeberSince"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_below="@id/iv_profilePic"
+        android:gravity="center_vertical"
+        android:text="Mitglied seit: " />
+
+    <TextView
+        android:id="@+id/tv_placeholder1"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_below="@id/tv_memeberSince"
+        android:gravity="center_vertical"
+        android:text="placeholder1: " />
+
+    <TextView
+        android:id="@+id/tv_placeholder2"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tv_placeholder1"
+        android:gravity="center_vertical"
+        android:text="placeholder2: " />
+
+    <TextView
+        android:id="@+id/tv_placeholder3"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tv_placeholder2"
+        android:gravity="center_vertical"
+        android:text="placeholder3 " />
+
+    <TextView
+        android:id="@+id/tv_placeholder4"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tv_placeholder3"
+        android:gravity="center_vertical"
+        android:text="placeholder4" />
+
+    <TextView
+        android:id="@+id/tv_placeholder5"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tv_placeholder4"
+        android:gravity="center_vertical"
+        android:text="placeholder5" />
+
+    <Button
+        android:id="@+id/btn_gotoSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/colorAccent"
+        android:text="Einstellungen"
+        android:textColor="@color/white" />
+</RelativeLayout>

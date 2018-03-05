@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "620315630165",
+    "firebase_url": "https://dinner-c3ee4.firebaseio.com",
+    "project_id": "dinner-c3ee4",
+    "storage_bucket": "dinner-c3ee4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:620315630165:android:a40b95c23074033f",
+        "android_client_info": {
+          "package_name": "com.jolameva.app.runningdinner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "620315630165-vej0l7ia6mkhf6h9rvkr8cd5932cfbv7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jolameva.app.runningdinner",
+            "certificate_hash": "9aed437cfa06abc843ff9697bf739de75c8d85e8"
+          }
+        },
+        {
+          "client_id": "620315630165-7d81gphqle8sd0a1ssrkfu4hafsf7har.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYnA_95HVPq1DWXUQMfjALiVPbDRCiXS0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "620315630165-7d81gphqle8sd0a1ssrkfu4hafsf7har.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

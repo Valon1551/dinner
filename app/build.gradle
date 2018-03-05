@@ -6,6 +6,7 @@ android {
         applicationId "com.jolameva.app.runningdinner"
         minSdkVersion 21
         targetSdkVersion 26
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -20,6 +21,10 @@ android {
 }
 
 dependencies {
+    implementation 'com.firebaseui:firebase-ui-auth:3.2.2'
+    implementation 'com.firebaseui:firebase-ui:3.2.2'
+    implementation 'com.google.firebase:firebase-auth:11.8.0'
+    implementation 'com.google.android.gms:play-services-auth:11.8.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.0.0'
     implementation 'com.facebook.android:facebook-login:[4,5)'
@@ -34,4 +39,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
 }
+apply plugin: 'com.google.gms.google-services'
+

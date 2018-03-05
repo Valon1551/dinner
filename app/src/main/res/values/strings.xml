@@ -75,8 +75,9 @@
     <string name="pref_title_vibrate">Vibrate</string>
 
     <!--Facebook ID's-->
-    <string name="facebook_app_id">445553339214503</string>
+    <string name="facebook_application_id">445553339214503</string>
     <string name="fb_login_protocol_scheme">fb445553339214503</string>
+    <string name="title_activity_profile">ProfileActivity</string>
 
 
 </resources>

@@ -40,12 +40,6 @@
             android:text="Bewertung abgeben"
             android:id="@+id/btn_rateProfile"/>
 
-        <Button
-            android:layout_above="@+id/btn_rateProfile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Zum Login"
-            android:id="@+id/btn_gotoLogin"/>
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
