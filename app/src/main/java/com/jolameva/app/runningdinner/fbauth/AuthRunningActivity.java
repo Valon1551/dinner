@@ -114,6 +114,7 @@ public class AuthRunningActivity extends AppCompatActivity {
         List<String> result = new ArrayList<>();
 
             result.add("user_friends");
+            result.add("public_profile");
             result.add("user_photos");
         return result;
     }

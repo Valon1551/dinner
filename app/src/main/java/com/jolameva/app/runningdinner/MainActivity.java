@@ -7,18 +7,27 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.jolameva.app.runningdinner.fbauth.AuthRunningActivity;
 import com.jolameva.app.runningdinner.profile.ProfileActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +78,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar main_toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(main_toolbar);
+
+        retrieveUserData(currentUser);
+
+//        SaveUser su = new SaveUser();
+//        su.retrieveUserData(currentUser);
+
         btn_Start = findViewById(R.id.btn_Start);
         btn_RateProfile = findViewById(R.id.btn_rateProfile);
 
@@ -92,6 +107,67 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void retrieveUserData(final FirebaseUser currentUser) {
+        final RDUser rdUser = new RDUser();
+
+        rdUser.setName(currentUser.getDisplayName());
+        rdUser.setEmail(currentUser.getEmail());
+        rdUser.setPicture(currentUser.getPhotoUrl());
+
+        String photoUrl = currentUser.getPhotoUrl().toString();
+
+        for (UserInfo profile : currentUser.getProviderData()){
+            if (profile.getProviderId().equals("facebook.com")){
+                String facebookUserId = profile.getUid(); // FacebookID
+
+                rdUser.setFacebookId(facebookUserId);
+
+                rdUser.setSignInProvider(profile.getProviderId()); // facebook.com | google.com
+
+                // Alternativ kann hier '?type=small|medium|large' verwendet werden
+                photoUrl = "https://graph.facebook.com/" + facebookUserId + "/picture?height=500";
+
+                if (AccessToken.getCurrentAccessToken()!= null){
+
+                    Log.d("AccessToken","Facebook Token erhalten"+AccessToken.getCurrentAccessToken());
+
+                    GraphRequest request = GraphRequest.newMeRequest(
+                            AccessToken.getCurrentAccessToken(),
+                            new GraphRequest.GraphJSONObjectCallback() {
+                                @Override
+                                public void onCompleted(JSONObject object, GraphResponse response) {
+                                    // Versuch Gender auszulesen
+                                    try {
+                                        // WTF warum muss das hier ein array sein?!?
+                                        String gender = object.getString("gender");
+                                        rdUser.setGender(gender);
+                                        rdUser.saveUser();
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                }
+                            });
+                    Bundle parameters = new Bundle();
+                    // firstname und lastname sind noch nicht in der rduser Klasse können wir aber später auch hinzufügen
+                    parameters.putString("fields", "id,name,link,email,first_name,last_name,gender");
+                    request.setParameters(parameters);
+                    request.executeAsync();
+                }
+
+
+            } else if (profile.getProviderId().equals("google.com")){
+                // Mit Google eingeloggt, code für google einfügen
+
+            }
+        }
+//        rdUser.setGender(gender);
+        rdUser.setLargePicture(photoUrl);
+        rdUser.setFirebaseId(currentUser.getUid());
+        rdUser.saveUser();
     }
 
     // Diese Methode holt sich die main_menu.xml und zeigt sie in der appbar an

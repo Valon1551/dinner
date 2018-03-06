@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "620315630165-2ff9tglpop262mheaqnf14s3rl86fiok.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jolameva.app.runningdinner",
+            "certificate_hash": "1e803539c6ad3d3f6aff403b0964db570152d883"
+          }
+        },
+        {
           "client_id": "620315630165-vej0l7ia6mkhf6h9rvkr8cd5932cfbv7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
