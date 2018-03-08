@@ -13,13 +13,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.common.api.GoogleApi;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.plus.model.people.Person;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         // Holt sich die IDP Response. Die IDP Response beinhaltet den Token vom Loginprovider
         mIdpResponse = getIntent().getParcelableExtra(EXTRA_IDP_RESPONSE);
         mSignedInConfig = getIntent().getParcelableExtra(EXTRA_SIGNED_IN_CONFIG);
+
 
         // Layout setzen
         setContentView(R.layout.activity_main);
@@ -172,6 +175,13 @@ public class MainActivity extends AppCompatActivity {
             } else if (profile.getProviderId().equals("google.com")){
                 // Mit Google eingeloggt, TODO: code für google einfügen um Gender und größeres Profilbild zu bekommen
 
+//                GoogleApiClient mGoogleApiClient;
+//                mGoogleApiClient = new GoogleApiClient.Builder(this)
+//                        .enableAutoManage(this, this)
+//                        .addOnConnectionFailedListener(this)
+//                        .addConnectionCallbacks(this)
+//                        .addApi(Auth.GOOGLE_SIGN_IN_API, mIdpResponse)
+//                        .build();
             }
         }
 //        rdUser.setGender(gender);
@@ -215,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Kp was das macht.. vielleicht braucht man das auch gar nicht.. Ich glaub das gehört zum Smartlock..
+     * Kp was das macht.. vielleicht braucht man das auch gar nicht.. Ich glaub das gehört zum Smartlock..Vielleicht auch nicht..
      *
      */
     public static final class SignedInConfig implements Parcelable {
