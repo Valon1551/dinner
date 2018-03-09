@@ -11,6 +11,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +32,10 @@ public class ActivityMatch extends AppCompatActivity {
         setContentView(R.layout.activity_match);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("users");
+
 
         initCollapsingToolbar();
 
@@ -105,26 +113,6 @@ public class ActivityMatch extends AppCompatActivity {
         groupObject = new GroupObject("1/4");
         groupList.add(groupObject);
         groupObject = new GroupObject("2/4");
-        groupList.add(groupObject);
-        groupObject = new GroupObject("3/4");
-        groupList.add(groupObject);
-        groupObject = new GroupObject("3/4");
-        groupList.add(groupObject);
-        groupObject = new GroupObject("3/4");
-        groupList.add(groupObject);
-        groupObject = new GroupObject("3/4");
-        groupList.add(groupObject);
-        groupObject = new GroupObject("3/4");
-        groupList.add(groupObject);
-        groupObject = new GroupObject("3/4");
-        groupList.add(groupObject);
-        groupObject = new GroupObject("3/4");
-        groupList.add(groupObject);
-        groupObject = new GroupObject("3/4");
-        groupList.add(groupObject);
-        groupObject = new GroupObject("3/4");
-        groupList.add(groupObject);
-        groupObject = new GroupObject("3/4");
         groupList.add(groupObject);
 
         groupAdapter.notifyDataSetChanged();
