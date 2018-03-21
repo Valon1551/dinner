@@ -26,7 +26,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
 import com.jolameva.app.runningdinner.fbauth.AuthRunningActivity;
-import com.jolameva.app.runningdinner.match.ListviewTestActivity;
 import com.jolameva.app.runningdinner.profile.ProfileActivity;
 
 import org.json.JSONException;
@@ -94,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         btn_Start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this , ListviewTestActivity.class);
+                Intent intent = new Intent(MainActivity.this , ActivityMatch.class);
                 startActivity(intent);
             }
         });

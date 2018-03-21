@@ -9,7 +9,7 @@
     tools:context=".ActivityMatch"
     tools:showIn="@layout/activity_match">
 
-    <Re
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_groups"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
