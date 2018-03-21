@@ -118,7 +118,7 @@ public class RDUser implements Serializable {
     public void saveUser() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users").child(getFirebaseId());
-//        myRef.setValue(getId());
+
         myRef = database.getReference("users").child(getFirebaseId()).child("name");
         myRef.setValue(getName());
         myRef = database.getReference("users").child(getFirebaseId()).child("email");
