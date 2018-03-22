@@ -25,7 +25,6 @@ import com.google.firebase.database.Query;
 import com.jolameva.app.runningdinner.fbauth.AuthRunningActivity;
 import com.jolameva.app.runningdinner.helperclass.MatchRooms;
 
-
 /*
     Hier werden die verschiedenen Räume aufgelistet die die User erstellen,
     damit andere beitreten können
@@ -62,6 +61,7 @@ public class ActivityMatch extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(ActivityMatch.this, "Match Me", Toast.LENGTH_SHORT).show();
+                removeMatchRoom(myRef);
             }
         });
         btn_newGroup.setOnClickListener(new View.OnClickListener() {
@@ -104,16 +104,23 @@ public class ActivityMatch extends AppCompatActivity {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_element_group, parent, false);
                 // Gibt die View weiter an die MatchRoomViewHolder Klasse
                 return new MatchRoomViewHolder(view);
+
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull MatchRoomViewHolder holder, int position, @NonNull MatchRooms model) {
+            protected void onBindViewHolder(@NonNull MatchRoomViewHolder holder, final int position, @NonNull MatchRooms model) {
 
                 // Hier können die Werte aus der MatchRooms Modell Klasse ausgelesen werden
                 // Mit der Methode setDetails werden dann die Werte mit Hilfe der ViewHolder Klasse in die ListRow gesetzt
                 // TODO: Alle notwendigen Daten setzen
                 holder.setDetails(model.getTitle().toString());
 
+                holder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(ActivityMatch.this, "clicked pos: "+position, Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
         };
@@ -138,12 +145,12 @@ public class ActivityMatch extends AppCompatActivity {
 
     public class MatchRoomViewHolder extends RecyclerView.ViewHolder {
 
-        View mView;
+        public View mView;
         public TextView tv_Room, tv_Mo, tv_Di, tv_Mi, tv_Do, tv_Fr, tv_Sa, tv_So;
 
-        public MatchRoomViewHolder(View itemView) {
+        public MatchRoomViewHolder(final View itemView) {
             super(itemView);
-            mView = itemView;
+            this.mView = itemView;
             tv_Room = itemView.findViewById(R.id.btn_Room);
             tv_Mo = itemView.findViewById(R.id.tv_Mo);
             tv_Di = itemView.findViewById(R.id.tv_Di);
@@ -152,8 +159,9 @@ public class ActivityMatch extends AppCompatActivity {
             tv_Fr = itemView.findViewById(R.id.tv_Fr);
             tv_Sa = itemView.findViewById(R.id.tv_Sa);
             tv_So = itemView.findViewById(R.id.tv_So);
-        }
 
+        }
+        
         public void setDetails(String titlex){
             tv_Room.setText(titlex);
         }
@@ -162,18 +170,29 @@ public class ActivityMatch extends AppCompatActivity {
     // WIP
     private void createMatchRoom(DatabaseReference matchroomRef) {
 
-        MatchRooms matchRooms = new MatchRooms();
-
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser == null) {
             startActivity(AuthRunningActivity.createIntent(this));
             finish();
             return;
         }
+        MatchRooms matchRooms = new MatchRooms();
         matchRooms.setRdUserId(currentUser.getUid());
-        matchRooms.setTitle("setTitle hat funktioniert");
+        matchRooms.setTitle("FireID "+currentUser.getUid());
         matchRooms.saveRoom();
+    }
 
+    private void removeMatchRoom(DatabaseReference matchroomRef){
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser == null) {
+            startActivity(AuthRunningActivity.createIntent(this));
+            finish();
+            return;
+        }
+
+        MatchRooms matchRooms = new MatchRooms();
+        matchRooms.setRdUserId(currentUser.getUid());
+        matchRooms.removeMatchRoom();
     }
 
     // Die Methode kann ignoriert werden, die kümmert sich nur um die Collapsing Toolbar
@@ -206,6 +225,5 @@ public class ActivityMatch extends AppCompatActivity {
             }
         });
     }
-
 
 }

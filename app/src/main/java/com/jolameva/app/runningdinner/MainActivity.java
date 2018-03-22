@@ -171,7 +171,6 @@ public class MainActivity extends AppCompatActivity {
                     request.executeAsync();
                 }
 
-
             } else if (profile.getProviderId().equals("google.com")){
                 // Mit Google eingeloggt, TODO: code für google einfügen um Gender und größeres Profilbild zu bekommen
 
@@ -184,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
 //                        .build();
             }
         }
-//        rdUser.setGender(gender);
+//        rdUser.setGender(gender); // funktioniert hier nicht weil das Geschlecht hier noch nicht ausgelesen wurde
         rdUser.setLargePicture(photoUrl);
         rdUser.setFirebaseId(currentUser.getUid());
         // Hier wird der RDUSER gespeichert und in die Datenbank eingetragen. saveUser() wird hier

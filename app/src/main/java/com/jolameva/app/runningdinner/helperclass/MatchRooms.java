@@ -15,15 +15,15 @@ public class MatchRooms implements Serializable {
 
 
 //    private String roomId;
-//    private String emptyPlaces;
+//    private String numberOfUsers;
 //    private String location;
     private String rdUserId;
     private String title;
     private String description;
 
-    public MatchRooms(/**String roomId, String emptyPlaces, String location,*/ String rdUserId,  String description, String title) {
+    public MatchRooms(/**String roomId, String numberOfUsers, String location,*/ String rdUserId,  String description, String title) {
 //        this.roomId = roomId;
-//        this.emptyPlaces = emptyPlaces;
+//        this.numberOfUsers = numberOfUsers;
 //        this.location = location;
         this.rdUserId = rdUserId;
         this.description = description;
@@ -74,12 +74,12 @@ public class MatchRooms implements Serializable {
 //        this.description = description;
 //    }
 //
-//    public String getEmptyPlaces() {
-//        return emptyPlaces;
+//    public String getNumberOfUsers() {
+//        return numberOfUsers;
 //    }
 //
-//    public void setEmptyPlaces(String emptyPlaces) {
-//        this.emptyPlaces = emptyPlaces;
+//    public void setNumberOfUsers(String emptyPlaces) {
+//        this.numberOfUsers = numberOfUsers;
 //    }
 //
 //    public String getLocation() {
@@ -104,5 +104,11 @@ public class MatchRooms implements Serializable {
 
         myRef = database.getReference("rooms").child(getRdUserId()).child("title");
         myRef.setValue(getTitle());
+    }
+
+    public void removeMatchRoom(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("rooms").child(getRdUserId());
+        myRef.removeValue();
     }
 }
