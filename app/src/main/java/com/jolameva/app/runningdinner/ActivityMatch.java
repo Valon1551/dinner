@@ -5,6 +5,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -68,7 +69,7 @@ public class ActivityMatch extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(ActivityMatch.this, "New Group", Toast.LENGTH_SHORT).show();
-                createMatchRoom(myRef);
+                createMatchRoom();
             }
         });
 
@@ -115,6 +116,13 @@ public class ActivityMatch extends AppCompatActivity {
                 // TODO: Alle notwendigen Daten setzen
                 holder.setDetails(model.getTitle().toString());
 
+                holder.btn_enterRoom.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(ActivityMatch.this, "clicked pos: "+position, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 holder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -146,29 +154,30 @@ public class ActivityMatch extends AppCompatActivity {
     public class MatchRoomViewHolder extends RecyclerView.ViewHolder {
 
         public View mView;
-        public TextView tv_Room, tv_Mo, tv_Di, tv_Mi, tv_Do, tv_Fr, tv_Sa, tv_So;
+        public TextView tv_Mo, tv_Di, tv_Mi, tv_Do, tv_Fr, tv_Sa, tv_So;
+        public  Button btn_enterRoom;
 
         public MatchRoomViewHolder(final View itemView) {
             super(itemView);
             this.mView = itemView;
-            tv_Room = itemView.findViewById(R.id.btn_Room);
+            btn_enterRoom = itemView.findViewById(R.id.btn_Room);
             tv_Mo = itemView.findViewById(R.id.tv_Mo);
             tv_Di = itemView.findViewById(R.id.tv_Di);
-            tv_Mi = itemView.findViewById(R.id.tv_Mi);
-            tv_Do = itemView.findViewById(R.id.tv_Do);
-            tv_Fr = itemView.findViewById(R.id.tv_Fr);
-            tv_Sa = itemView.findViewById(R.id.tv_Sa);
-            tv_So = itemView.findViewById(R.id.tv_So);
+            //tv_Mi = itemView.findViewById(R.id.tv_Mi);
+            //tv_Do = itemView.findViewById(R.id.tv_Do);
+            //tv_Fr = itemView.findViewById(R.id.tv_Fr);
+            //tv_Sa = itemView.findViewById(R.id.tv_Sa);
+            //tv_So = itemView.findViewById(R.id.tv_So);
 
         }
-        
+
         public void setDetails(String titlex){
-            tv_Room.setText(titlex);
+            btn_enterRoom.setText(titlex);
         }
     }
 
     // WIP
-    private void createMatchRoom(DatabaseReference matchroomRef) {
+    private void createMatchRoom() {
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser == null) {
