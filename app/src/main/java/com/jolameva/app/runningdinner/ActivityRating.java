@@ -42,7 +42,7 @@ public class ActivityRating extends AppCompatActivity {
 //            }
 //        });
 
-        Glide.with(this).load(R.drawable.profile_pic_zacke).into(iv_ProfilePic);
+        Glide.with(this).load(R.drawable.pasta).into(iv_ProfilePic);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String profileName = sharedPreferences.getString("example_text","Name nicht gefunden");
         tv_ProfileName.setText(profileName);

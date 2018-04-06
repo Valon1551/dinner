@@ -78,6 +78,7 @@
     <string name="facebook_application_id">445553339214503</string>
     <string name="fb_login_protocol_scheme">fb445553339214503</string>
     <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_chat">ActivityChat</string>
 
 
 </resources>
