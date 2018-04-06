@@ -1,4 +1,4 @@
-package com.jolameva.app.runningdinner.helperclass;
+package com.jolameva.app.runningdinner.model;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

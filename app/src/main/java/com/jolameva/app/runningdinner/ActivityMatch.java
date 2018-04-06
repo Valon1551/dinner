@@ -1,11 +1,11 @@
 package com.jolameva.app.runningdinner;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -23,8 +23,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+//import com.jolameva.app.runningdinner.chat.ActivityChat;
+import com.jolameva.app.runningdinner.chat.ActivityChat2;
 import com.jolameva.app.runningdinner.fbauth.AuthRunningActivity;
-import com.jolameva.app.runningdinner.helperclass.MatchRooms;
+import com.jolameva.app.runningdinner.model.MatchRooms;
 
 /*
     Hier werden die verschiedenen Räume aufgelistet die die User erstellen,
@@ -74,7 +76,7 @@ public class ActivityMatch extends AppCompatActivity {
         });
 
         // Check ob der User noch eingeloggt ist
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        final FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser == null) {
             finish();
             return;
@@ -119,7 +121,10 @@ public class ActivityMatch extends AppCompatActivity {
                 holder.btn_enterRoom.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(ActivityMatch.this, "clicked pos: "+position, Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(ActivityMatch.this, ActivityChat2.class);
+//                        intent.putExtra("id",currentUser.getUid().toString());
+                        startActivity(intent);
+
                     }
                 });
 

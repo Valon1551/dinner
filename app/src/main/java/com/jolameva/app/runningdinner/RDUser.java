@@ -42,6 +42,12 @@ public class RDUser implements Serializable {
 
     }
 
+    public RDUser(String displayName, String firebasePhotoUrl, String firebaseId) {
+        this.firebaseId = firebaseId;
+        this.largePicture = firebasePhotoUrl;
+        this.name = displayName;
+    }
+
     public String getFirebaseId() {
         return firebaseId;
     }

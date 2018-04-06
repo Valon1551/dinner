@@ -48,7 +48,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".profile.ProfileActivity" />
-        <activity android:name=".match.ListviewTestActivity"></activity>
+        <activity android:name=".chat.ActivityChat2"/>
     </application>
 
 </manifest>
