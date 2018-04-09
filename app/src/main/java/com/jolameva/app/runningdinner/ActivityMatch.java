@@ -118,11 +118,14 @@ public class ActivityMatch extends AppCompatActivity {
                 // TODO: Alle notwendigen Daten setzen
                 holder.setDetails(model.getTitle().toString());
 
+                // TODO: Hier kommt immer np exception.. die model variable hat lediglich Title als wert aber sonst nichts.. warum?!
+//                holder.setRoomID(model.getRdUserId().toString());
+                final String roomID = model.getTitle().toString();
                 holder.btn_enterRoom.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(ActivityMatch.this, ActivityChat2.class);
-//                        intent.putExtra("id",currentUser.getUid().toString());
+                        intent.putExtra("roomid", roomID);
                         startActivity(intent);
 
                     }
@@ -131,7 +134,7 @@ public class ActivityMatch extends AppCompatActivity {
                 holder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(ActivityMatch.this, "clicked pos: "+position, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivityMatch.this, "clicked pos: " + position, Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -160,7 +163,8 @@ public class ActivityMatch extends AppCompatActivity {
 
         public View mView;
         public TextView tv_Mo, tv_Di, tv_Mi, tv_Do, tv_Fr, tv_Sa, tv_So;
-        public  Button btn_enterRoom;
+        public Button btn_enterRoom;
+        public String roomID;
 
         public MatchRoomViewHolder(final View itemView) {
             super(itemView);
@@ -176,8 +180,12 @@ public class ActivityMatch extends AppCompatActivity {
 
         }
 
-        public void setDetails(String titlex){
+        public void setDetails(String titlex) {
             btn_enterRoom.setText(titlex);
+        }
+
+        public void setRoomID(String roomIDx) {
+            tv_Mo.setText(roomIDx);
         }
     }
 
@@ -192,11 +200,11 @@ public class ActivityMatch extends AppCompatActivity {
         }
         MatchRooms matchRooms = new MatchRooms();
         matchRooms.setRdUserId(currentUser.getUid());
-        matchRooms.setTitle("FireID "+currentUser.getUid());
+        matchRooms.setTitle("FireID " + currentUser.getUid());
         matchRooms.saveRoom();
     }
 
-    private void removeMatchRoom(DatabaseReference matchroomRef){
+    private void removeMatchRoom(DatabaseReference matchroomRef) {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser == null) {
             startActivity(AuthRunningActivity.createIntent(this));

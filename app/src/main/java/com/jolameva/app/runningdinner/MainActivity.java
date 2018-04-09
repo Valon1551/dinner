@@ -16,16 +16,13 @@ import android.widget.Button;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.Profile;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
-import com.google.android.gms.common.api.GoogleApi;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.plus.model.people.Person;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
 import com.jolameva.app.runningdinner.fbauth.AuthRunningActivity;
+import com.jolameva.app.runningdinner.model.RDUser;
 import com.jolameva.app.runningdinner.profile.ProfileActivity;
 
 import org.json.JSONException;

@@ -2,7 +2,6 @@ package com.jolameva.app.runningdinner.model;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.jolameva.app.runningdinner.RDUser;
 
 import java.io.Serializable;
 
@@ -49,7 +48,13 @@ public class MatchRooms implements Serializable {
         this.description = description;
     }
 
+    public String getRdUserId() {
+        return rdUserId;
+    }
 
+    public void setRdUserId(String rdUserId) {
+        this.rdUserId = rdUserId;
+    }
 //    public String getRoomId() {
 //        return roomId;
 //    }
@@ -90,13 +95,7 @@ public class MatchRooms implements Serializable {
 //        this.location = location;
 //    }
 //
-    public String getRdUserId() {
-        return rdUserId;
-    }
 
-    public void setRdUserId(String rdUserId) {
-        this.rdUserId = rdUserId;
-    }
 
     public void saveRoom(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -104,6 +103,8 @@ public class MatchRooms implements Serializable {
 
         myRef = database.getReference("rooms").child(getRdUserId()).child("title");
         myRef.setValue(getTitle());
+        myRef = database.getReference("rooms").child(getRdUserId()).child("roomid");
+        myRef.setValue(getRdUserId());
     }
 
     public void removeMatchRoom(){

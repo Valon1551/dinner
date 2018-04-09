@@ -1,4 +1,4 @@
-package com.jolameva.app.runningdinner;
+package com.jolameva.app.runningdinner.model;
 
 import android.net.Uri;
 

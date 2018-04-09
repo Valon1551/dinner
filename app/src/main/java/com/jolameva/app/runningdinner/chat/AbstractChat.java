@@ -12,6 +12,10 @@ public abstract class AbstractChat {
 
     public abstract String getUid();
 
+    public abstract long getTimestamp();
+
+    public abstract String getFromUserId();
+
     @Override
     public abstract int hashCode();
 

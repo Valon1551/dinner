@@ -10,17 +10,36 @@ public class ChatModel extends AbstractChat{
     private String mAvatarUrl;
     private String mMessage;
     private String mUid;
+    private long mTimestamp;
+    private String mFromUserId;
 
     public ChatModel() {
         // Needed for Firebase
     }
 
-    public ChatModel(String avatarUrl, String message, String uid) {
+    public ChatModel(String avatarUrl, String message, String uid, long timestamp, String fromUserId) {
         mAvatarUrl = avatarUrl;
         mMessage = message;
         mUid = uid;
+        mTimestamp = timestamp;
+        mFromUserId = fromUserId;
     }
 
+    public String getFromUserId() {
+        return mFromUserId;
+    }
+
+    public void setFromUserId(String mFromUserId) {
+        this.mFromUserId = mFromUserId;
+    }
+
+    public long getTimestamp() {
+        return mTimestamp;
+    }
+
+    public void setTimestamp(long mTimestamp) {
+        this.mTimestamp = mTimestamp;
+    }
     public String getAvatarUrl() {
         return mAvatarUrl;
     }

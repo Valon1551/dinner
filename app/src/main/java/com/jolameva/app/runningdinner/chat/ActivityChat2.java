@@ -1,11 +1,13 @@
 package com.jolameva.app.runningdinner.chat;
 
 import android.app.DownloadManager;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,18 +34,27 @@ public class ActivityChat2 extends AppCompatActivity implements FirebaseAuth.Aut
     private static final String TAG = "RTDB";
     public static final int VIEW_TYPE_USER_MESSAGE = 0;
     public static final int VIEW_TYPE_FRIEND_MESSAGE = 1;
+    public static String roomID;
     protected static Query chatQuery = FirebaseDatabase.getInstance().getReference().child("chats");
-    public static boolean OWN_MESSAGE;
 
     RecyclerView mRecyclerView;
     ImageButton btnSend;
     EditText etMessageEdit;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat2);
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+
+        if (bundle != null){
+            roomID = bundle.getString("roomid");
+            chatQuery = FirebaseDatabase.getInstance().getReference().child("chats").child(roomID);
+        }
 
         btnSend = findViewById(R.id.btnSend);
         etMessageEdit = (EditText) findViewById(R.id.editWriteMessage);
@@ -108,7 +119,13 @@ public class ActivityChat2 extends AppCompatActivity implements FirebaseAuth.Aut
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String avatarUrl = FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString();
 
-        onAddMessage(new ChatModel(avatarUrl, etMessageEdit.getText().toString(), uid));
+        long timestamp = System.currentTimeMillis();
+        // Auf isEmpty prüfen sonst werden leere Messages auch zur DB hinzugefügt
+        if (TextUtils.isEmpty(etMessageEdit.getText().toString().trim())){
+            Log.d(TAG, "Empty Message will not be sent");
+        } else {
+            onAddMessage(new ChatModel(avatarUrl, etMessageEdit.getText().toString(), uid,  timestamp, uid));
+        }
 
         etMessageEdit.setText("");
     }
@@ -136,7 +153,6 @@ public class ActivityChat2 extends AppCompatActivity implements FirebaseAuth.Aut
 
             @Override
             protected void onBindViewHolder(@NonNull ChatHolder holder, int position, @NonNull ChatModel model) {
-
                 holder.bind(model);
             }
 

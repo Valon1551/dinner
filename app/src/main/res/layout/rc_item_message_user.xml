@@ -27,7 +27,16 @@
         android:layout_marginEnd="5dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_marginStart="20dp"
-        android:text="a"
+        android:text="Beispiel Message"
         android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/tv_messageTimestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/textContent"
+        android:layout_below="@+id/textContent"
+        android:padding="3dp"
+        android:text="vor einer Minute" />
 
 </RelativeLayout>

@@ -3,31 +3,40 @@
     android:id="@+id/layout2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="5dp">
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="10dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivChatAvatar"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_marginStart="5dp"
-        android:src="@drawable/default_avata"/>
+        android:src="@drawable/default_avata" />
 
     <TextView
         android:id="@+id/textContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/ivChatAvatar"
         android:background="@drawable/rounded_corner2"
         android:padding="10dp"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@id/ivChatAvatar"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="20dp"
-        android:text="A"
+        android:text="Beispiel Message"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/tv_messageTimestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textContent"
+        android:layout_below="@+id/textContent"
+        android:padding="3dp"
+        android:text="vor einer Minute" />
 
 </RelativeLayout>
