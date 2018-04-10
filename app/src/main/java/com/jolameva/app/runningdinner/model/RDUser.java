@@ -15,7 +15,7 @@ public class RDUser implements Serializable {
 
 
     private String firebaseId;
-    private Uri picture;
+    private String picture;
     private String largePicture;
     private String name;
     private String facebookId;
@@ -25,7 +25,7 @@ public class RDUser implements Serializable {
     private String gender;
 
 
-    public RDUser(String firebaseId, Uri picture, String largePicture, String name,
+    public RDUser(String firebaseId, String picture, String largePicture, String name,
                   String facebookId, String googleId, String email, String signInProvider) {
 
         this.firebaseId = firebaseId;
@@ -52,7 +52,7 @@ public class RDUser implements Serializable {
         return firebaseId;
     }
 
-    public Uri getPicture() {
+    public String getPicture() {
         return picture;
     }
 
@@ -80,7 +80,7 @@ public class RDUser implements Serializable {
         this.firebaseId = firebaseId;
     }
 
-    public void setPicture(Uri picture) {
+    public void setPicture(String picture) {
         this.picture = picture;
     }
 

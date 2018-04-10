@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         // Weitere Attribute außer noch die FirebaseID sind im FirebaseUser nicht vorhanden
         rdUser.setName(currentUser.getDisplayName());
         rdUser.setEmail(currentUser.getEmail());
-        rdUser.setPicture(currentUser.getPhotoUrl());
+        rdUser.setPicture(currentUser.getPhotoUrl().toString());
 
         String photoUrl = currentUser.getPhotoUrl().toString();
 

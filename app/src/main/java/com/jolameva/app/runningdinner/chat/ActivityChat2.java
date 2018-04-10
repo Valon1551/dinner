@@ -80,7 +80,7 @@ public class ActivityChat2 extends AppCompatActivity implements FirebaseAuth.Aut
     @Override
     protected void onStop() {
         super.onStop();
-        FirebaseAuth.getInstance().removeAuthStateListener(this);
+//        FirebaseAuth.getInstance().removeAuthStateListener(this);
     }
 
 
@@ -152,10 +152,26 @@ public class ActivityChat2 extends AppCompatActivity implements FirebaseAuth.Aut
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull ChatHolder holder, int position, @NonNull ChatModel model) {
+            protected void onBindViewHolder(@NonNull final ChatHolder holder, final int position, @NonNull ChatModel model) {
                 holder.bind(model);
+
+                // Dieser Code ist dazu da, dass man über den Avatar im Chat auf das Benutzerprofils kommt von dem die Nachricht
+                // geschrieben wurde. Da es sich hier um eine inner class handelt muss das ChatModel in eine neue ChatModel
+                // variable übertragen werden, die dann als final deklariert werden muss
+                final ChatModel chat = model;
+                holder.avatarUser.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // Gib das Chatmodel an die openFirendProfile Methode weiter, um auf die UserId zugreifen zu können
+                        holder.openFriendProfile(chat);
+                    }
+                });
             }
 
+            @Override
+            public ChatModel getItem(int position){
+                return super.getItem(position);
+            }
             @Override
             public int getItemViewType(int position){
                 FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();

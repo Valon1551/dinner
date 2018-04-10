@@ -124,6 +124,7 @@ public class ActivityMatch extends AppCompatActivity {
                 holder.btn_enterRoom.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         Intent intent = new Intent(ActivityMatch.this, ActivityChat2.class);
                         intent.putExtra("roomid", roomID);
                         startActivity(intent);
