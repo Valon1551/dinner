@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.common.Scopes;
 import com.google.firebase.auth.FirebaseAuth;
 import com.jolameva.app.runningdinner.MainActivity;
 import com.jolameva.app.runningdinner.R;
@@ -109,24 +110,22 @@ public class AuthRunningActivity extends AppCompatActivity {
         return selectedProviders;
     }
 
-
+    // Permissions für Facebook
     private List<String> getFacebookPermissions() {
         List<String> result = new ArrayList<>();
-
             result.add("user_friends");
             result.add("public_profile");
             result.add("user_photos");
         return result;
     }
 
+    // Permissions für Google
     private List<String> getGoogleScopes() {
         List<String> result = new ArrayList<>();
-//        if (mGoogleScopeYoutubeData.isChecked()) {
 //            result.add("https://www.googleapis.com/auth/youtube.readonly");
-//        }
-//        if (mGoogleScopeDriveFile.isChecked()) {
+        result.add(Scopes.PLUS_ME);
 //            result.add(Scopes.DRIVE_FILE);
-//        }
+
         return result;
     }
 }

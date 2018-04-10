@@ -5,11 +5,12 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     >
 
-    <ImageView
+    <pl.droidsonroids.gif.GifImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/pasta"/>
+        android:src="@drawable/gif_logo_slack"/>
 
 </android.support.design.widget.CoordinatorLayout>

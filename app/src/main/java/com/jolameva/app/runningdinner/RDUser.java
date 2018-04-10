@@ -118,23 +118,56 @@ public class RDUser implements Serializable {
     public void saveUser() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users").child(getFirebaseId());
-//        myRef.setValue(getId());
+
         myRef = database.getReference("users").child(getFirebaseId()).child("name");
-        myRef.setValue(getName());
+        if (getName() != null) {
+            myRef.setValue(getName());
+        } else {
+            myRef.setValue("null");
+        }
         myRef = database.getReference("users").child(getFirebaseId()).child("email");
-        myRef.setValue(getEmail());
+        if (getEmail() != null) {
+            myRef.setValue(getEmail());
+        } else {
+            myRef.setValue("null");
+        }
         myRef = database.getReference("users").child(getFirebaseId()).child("facebookUID");
-        myRef.setValue(getFacebookId());
+        if (getFacebookId() != null) {
+            myRef.setValue(getFacebookId());
+        } else {
+            myRef.setValue("null");
+        }
         myRef = database.getReference("users").child(getFirebaseId()).child("googleUID");
-        myRef.setValue(getGoogleId());
+        if (getGoogleId() != null) {
+            myRef.setValue(getGoogleId());
+        } else {
+            myRef.setValue("null");
+        }
         myRef = database.getReference("users").child(getFirebaseId()).child("gender");
-        myRef.setValue(getGender());
+        if (getGender() != null) {
+            myRef.setValue(getGender());
+        } else {
+            myRef.setValue("null");
+        }
         myRef = database.getReference("users").child(getFirebaseId()).child("picture");
-        myRef.setValue(getPicture().toString());
+        if (getPicture() != null) {
+            myRef.setValue(getPicture().toString());
+        } else {
+            myRef.setValue("null");
+        }
         myRef = database.getReference("users").child(getFirebaseId()).child("largePicture");
-        myRef.setValue(getLargePicture());
+        if (getLargePicture() != null) {
+            myRef.setValue(getLargePicture());
+        } else {
+            myRef.setValue("null");
+        }
         myRef = database.getReference("users").child(getFirebaseId()).child("signInProvider");
-        myRef.setValue(getSignInProvider());
+        if (signInProvider != null) {
+
+            myRef.setValue(getSignInProvider());
+        } else {
+            myRef.setValue("null");
+        }
     }
 
 }
