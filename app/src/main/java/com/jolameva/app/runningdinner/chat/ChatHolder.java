@@ -46,7 +46,6 @@ public class ChatHolder extends RecyclerView.ViewHolder {
     }
 
     public void openFriendProfile(AbstractChat chat) {
-        int position = getAdapterPosition();
 
         String friendUserId = chat.getUid();
         Toast.makeText(context, friendUserId, Toast.LENGTH_SHORT).show();
