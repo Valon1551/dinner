@@ -3,7 +3,6 @@ package com.jolameva.app.runningdinner.chat;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +12,13 @@ import com.bumptech.glide.request.RequestOptions;
 import com.jolameva.app.runningdinner.R;
 import com.jolameva.app.runningdinner.model.ChatModel;
 import com.jolameva.app.runningdinner.profile.FriendProfileActivity;
+
+import org.threeten.bp.Instant;
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZonedDateTime;
+import org.threeten.bp.format.DateTimeFormatter;
+
+import java.util.TimeZone;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -51,7 +57,7 @@ public class ChatHolder extends RecyclerView.ViewHolder {
         Toast.makeText(context, friendUserId, Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(context, FriendProfileActivity.class);
-        intent.putExtra("frienduserid",friendUserId);
+        intent.putExtra("frienduserid", friendUserId);
         context.startActivity(intent);
 
 
@@ -77,9 +83,21 @@ public class ChatHolder extends RecyclerView.ViewHolder {
 
     private void setMessageTimestamp(long timestamp) {
 
+
         // Zeigt den Timestamp wie bei Youtube an
-        CharSequence elapsedTime = DateUtils.getRelativeTimeSpanString(timestamp, System.currentTimeMillis(), 0);
-        mMessageTimestamp.setText(elapsedTime);
+//            CharSequence readableTimestamp = DateUtils.getRelativeTimeSpanString(timestamp, System.currentTimeMillis(), 0);
+//            mMessageTimestamp.setText(readableTimestamp);
+//
+
+        // Zeigt das Datum im HH:mm dd.MM an
+        Instant instant = Instant.ofEpochMilli(timestamp);
+        ZonedDateTime z = instant.atZone(ZoneId.of(TimeZone.getDefault().getID())); // getID() = Berlin / Germany oder so
+        // Formatieren
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("HH:mm dd.MM");
+
+        mMessageTimestamp.setText(fmt.format(z));
+
+
     }
 
 }

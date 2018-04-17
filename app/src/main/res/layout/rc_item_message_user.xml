@@ -29,7 +29,8 @@
         android:padding="10dp"
         android:text="Beispiel Message"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        />
 
     <TextView
         android:id="@+id/tv_messageTimestamp"
