@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,19 +49,31 @@ public class ActivityChat2 extends AppCompatActivity implements FirebaseAuth.Aut
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat2);
 
+        // Holt sich die Extras aus der MatchRoomsAct.
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
+        // Hier muss später wahrscheinlich shared preferences benutzt werden
         if (bundle != null){
             roomID = bundle.getString("roomid");
             chatQuery = FirebaseDatabase.getInstance().getReference().child("chats").child(roomID);
         }
 
+        // Layout binden
         btnSend = findViewById(R.id.btnSend);
         etMessageEdit = (EditText) findViewById(R.id.editWriteMessage);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerChat);
+
+        // Sollte auf true bleiben damit unnötige überprüfungen auf veränderungen der Größe eines Listenitems übersprungen werden
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        // Sorgt dafür dass der Chat hochscrollt wenn die Tastatur geöffnet wird. Problem: wenn der chat nur eine nachricht hat
+        // wird diese nachricht ebenfalls am unteren ende angezeigt anstatt oben
+        layoutManager.setStackFromEnd(true);
+        mRecyclerView.setLayoutManager(layoutManager);
+
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,13 +93,14 @@ public class ActivityChat2 extends AppCompatActivity implements FirebaseAuth.Aut
     @Override
     protected void onStop() {
         super.onStop();
-//        FirebaseAuth.getInstance().removeAuthStateListener(this);
     }
 
 
 
     @Override
     public void onAuthStateChanged(@NonNull FirebaseAuth auth) {
+
+        // Nachrichten schreiben nur möglich wenn man eingeloggt ist
         btnSend.setEnabled(isSignedIn());
         etMessageEdit.setEnabled(isSignedIn());
 
@@ -97,6 +111,7 @@ public class ActivityChat2 extends AppCompatActivity implements FirebaseAuth.Aut
         }
     }
 
+    // Prüft ob der Current User eingeloggt ist
     private boolean isSignedIn() {
         return FirebaseAuth.getInstance().getCurrentUser() != null;
     }
@@ -124,9 +139,10 @@ public class ActivityChat2 extends AppCompatActivity implements FirebaseAuth.Aut
         if (TextUtils.isEmpty(etMessageEdit.getText().toString().trim())){
             Log.d(TAG, "Empty Message will not be sent");
         } else {
+            // Gibt die Daten weiter an die ChatModel Klasse
             onAddMessage(new ChatModel(avatarUrl, etMessageEdit.getText().toString(), uid,  timestamp, uid));
         }
-
+        // Leert die EditTextbox nach jedem Button klick
         etMessageEdit.setText("");
     }
 
@@ -141,6 +157,7 @@ public class ActivityChat2 extends AppCompatActivity implements FirebaseAuth.Aut
             @Override
             public ChatHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
+                // Wähle das richtige Chatblasen Layout
                 if (viewType == VIEW_TYPE_USER_MESSAGE){
 
                     return new ChatHolder(LayoutInflater.from(parent.getContext())
@@ -155,7 +172,7 @@ public class ActivityChat2 extends AppCompatActivity implements FirebaseAuth.Aut
             protected void onBindViewHolder(@NonNull final ChatHolder holder, final int position, @NonNull ChatModel model) {
                 holder.bind(model);
 
-                // Dieser Code ist dazu da, dass man über den Avatar im Chat auf das Benutzerprofils kommt von dem die Nachricht
+                // Dieser Code ist dazu da, dass man über den Avatar im Chat auf das Benutzerprofil kommt von dem die Nachricht
                 // geschrieben wurde. Da es sich hier um eine inner class handelt muss das ChatModel in eine neue ChatModel
                 // variable übertragen werden, die dann als final deklariert werden muss
                 final ChatModel chat = model;
@@ -176,6 +193,7 @@ public class ActivityChat2 extends AppCompatActivity implements FirebaseAuth.Aut
             public int getItemViewType(int position){
                 FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
+                // Checkt ob es sich um eine eigene Message handelt oder nicht
                 ChatModel chatModel2 = getItem(position);
                 if (chatModel2.getUid().equals(currentUser.getUid())){
                     return VIEW_TYPE_USER_MESSAGE;
@@ -187,6 +205,7 @@ public class ActivityChat2 extends AppCompatActivity implements FirebaseAuth.Aut
     }
 
     protected void onAddMessage(ChatModel chat) {
+        // Mit push wird auf die DB geschrieben
         chatQuery.getRef().push().setValue(chat, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError error, DatabaseReference reference) {
