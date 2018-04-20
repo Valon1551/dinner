@@ -49,7 +49,8 @@
         </activity>
         <activity android:name=".profile.ProfileActivity" />
         <activity android:name=".chat.ActivityChat2" />
-        <activity android:name=".profile.FriendProfileActivity"></activity>
+        <activity android:name=".profile.FriendProfileActivity" />
+        <activity android:name=".creatematchroom.CreateMatchRoomActivity"></activity>
     </application>
 
 </manifest>

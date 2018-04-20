@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 //import com.jolameva.app.runningdinner.chat.ActivityChat;
 import com.jolameva.app.runningdinner.chat.ActivityChat2;
+import com.jolameva.app.runningdinner.creatematchroom.CreateMatchRoomActivity;
 import com.jolameva.app.runningdinner.fbauth.AuthRunningActivity;
 import com.jolameva.app.runningdinner.model.MatchRooms;
 
@@ -115,11 +116,9 @@ public class ActivityMatch extends AppCompatActivity {
 
                 // Hier können die Werte aus der MatchRooms Modell Klasse ausgelesen werden
                 // Mit der Methode setDetails werden dann die Werte mit Hilfe der ViewHolder Klasse in die ListRow gesetzt
-                // TODO: Alle notwendigen Daten setzen
+                // TODO: Alle notwendigen Daten für die Cardview setzen
                 holder.setDetails(model.getTitle().toString());
 
-                // TODO: Hier kommt immer np exception.. die model variable hat lediglich Title als wert aber sonst nichts.. warum?!
-//                holder.setRoomID(model.getRdUserId().toString());
                 final String roomID = model.getTitle().toString();
                 holder.btn_enterRoom.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -200,9 +199,14 @@ public class ActivityMatch extends AppCompatActivity {
             return;
         }
         MatchRooms matchRooms = new MatchRooms();
-        matchRooms.setRdUserId(currentUser.getUid());
-        matchRooms.setTitle("FireID " + currentUser.getUid());
+        // Hier werden die Attribute gesetzt damit man später über model. drauf zugreifen kann.
+        matchRooms.setRduserid(currentUser.getUid());
+        matchRooms.setTitle("FireID " + currentUser.getUid().substring(0,6));
+        matchRooms.setRoomid(currentUser.getUid());
         matchRooms.saveRoom();
+
+        Intent intent = new Intent(ActivityMatch.this, CreateMatchRoomActivity.class);
+        startActivity(intent);
     }
 
     private void removeMatchRoom(DatabaseReference matchroomRef) {
@@ -214,7 +218,7 @@ public class ActivityMatch extends AppCompatActivity {
         }
 
         MatchRooms matchRooms = new MatchRooms();
-        matchRooms.setRdUserId(currentUser.getUid());
+        matchRooms.setRduserid(currentUser.getUid());
         matchRooms.removeMatchRoom();
     }
 

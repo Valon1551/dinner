@@ -16,16 +16,16 @@ public class MatchRooms implements Serializable {
 //    private String roomId;
 //    private String numberOfUsers;
 //    private String location;
-    private String rdUserId;
+    private String rduserid;
     private String title;
-    private String description;
+    private String roomid;
 
-    public MatchRooms(/**String roomId, String numberOfUsers, String location,*/ String rdUserId,  String description, String title) {
+    public MatchRooms(/**String roomId, String numberOfUsers, String location,*/String rdUserId, String roomid, String title) {
 //        this.roomId = roomId;
 //        this.numberOfUsers = numberOfUsers;
 //        this.location = location;
-        this.rdUserId = rdUserId;
-        this.description = description;
+        this.rduserid = rdUserId;
+        this.roomid = roomid;
         this.title = title;
     }
 
@@ -40,20 +40,20 @@ public class MatchRooms implements Serializable {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getRoomid() {
+        return roomid;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setRoomid(String roomid) {
+        this.roomid = roomid;
     }
 
-    public String getRdUserId() {
-        return rdUserId;
+    public String getRduserid() {
+        return rduserid;
     }
 
-    public void setRdUserId(String rdUserId) {
-        this.rdUserId = rdUserId;
+    public void setRduserid(String rdUserId) {
+        this.rduserid = rdUserId;
     }
 //    public String getRoomId() {
 //        return roomId;
@@ -71,12 +71,12 @@ public class MatchRooms implements Serializable {
 //        this.title = title;
 //    }
 //
-//    public String getDescription() {
-//        return description;
+//    public String getRoomid() {
+//        return roomid;
 //    }
 //
-//    public void setDescription(String description) {
-//        this.description = description;
+//    public void setRoomid(String roomid) {
+//        this.roomid = roomid;
 //    }
 //
 //    public String getNumberOfUsers() {
@@ -99,17 +99,17 @@ public class MatchRooms implements Serializable {
 
     public void saveRoom(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("rooms").child(getRdUserId());
+        DatabaseReference myRef = database.getReference("rooms").child(getRduserid());
 
-        myRef = database.getReference("rooms").child(getRdUserId()).child("title");
+        myRef = database.getReference("rooms").child(getRduserid()).child("title");
         myRef.setValue(getTitle());
-        myRef = database.getReference("rooms").child(getRdUserId()).child("roomid");
-        myRef.setValue(getRdUserId());
+        myRef = database.getReference("rooms").child(getRduserid()).child("roomid");
+        myRef.setValue(getRoomid());
     }
 
     public void removeMatchRoom(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("rooms").child(getRdUserId());
+        DatabaseReference myRef = database.getReference("rooms").child(getRduserid());
         myRef.removeValue();
     }
 }
